@@ -1,0 +1,38 @@
+{% set name = "WaLSAtools" %}
+{% set version = "1.0.0.post1" %}
+{% set sha256 = "6b61a32a37b629fba3f0ba631715119eb565a6188016b82e113925074ac2354f" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+
+requirements:
+  host:
+    - python >=3.6
+    - pip
+  run:
+    - python >=3.6
+    - numpy
+    - scipy
+    - astropy
+    - matplotlib
+
+test:
+  imports:
+    - WaLSAtools
+
+about:
+  home: "https://github.com/WaLSAteam/WaLSAtools"
+  summary: "Wave analysis tools package for spectral and spatio-temporal analysis"
+  license: Apache-2.0
+  license_family: APACHE
+  license_file: LICENSE
